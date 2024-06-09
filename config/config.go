@@ -74,9 +74,9 @@ func GetGlobalConf() *GlobalConfig {
 
 // 使用Viper管理配置
 func readConfig() {
-	viper.SetConfigName("config") //指定配置文件的名称（不需要带后缀）
-	viper.SetConfigType("yml")    //指定配置文件类型
-	viper.AddConfigPath("./conf") //指定查找配置文件的路径，这里使用相对路径
+	viper.SetConfigName("config1") //指定配置文件的名称（不需要带后缀）
+	viper.SetConfigType("yml")     //指定配置文件类型
+	viper.AddConfigPath("./conf")  //指定查找配置文件的路径，这里使用相对路径
 	viper.AddConfigPath(".")
 	viper.AddConfigPath("../conf")
 	err := viper.ReadInConfig() //读取配置信息

@@ -1,0 +1,42 @@
+#服务的配置文件
+
+#app本身的配置
+app:
+  app_name: "bluebell"  #应用名称
+  version: "v1.0.1" #app版本
+  port: 8081 #服务启动监听的端口
+  run_mode: debug #发布模式，可选debug、release
+
+#log的配置
+log:
+  level: info  #日志的级别 panic,fatal,error,warn,info,debug,trace
+  log_pattern: file #日志模式 可选stdout, stderr, file模式
+  log_path: ./log  #日志路径
+  filename: "bluebell.log"
+  max_size: 100  #文件大小
+  max_ages: 30   #默认存储30天
+  max_backups: 3 #备份数量
+
+#mysql相关的配置
+mysql:
+  host: "127.0.0.1"     # host 地址
+  port: 3306          # port 端口
+  user: "root"        # user 用户
+  password: "123456"  # password 密码
+  dbname: "bluebell"    # dbname 数据库名
+  max_idle_conn: 50    # 最大空闲连接数
+  max_open_conn: 20   # 最大连接数
+  max_idle_time: 300  # 最大空闲时间
+
+#redis相关配置
+redis:
+  host: "127.0.0.1"   #地址
+  port: 6379    #端口
+  db: 0       #数据库名0-15
+  password: "123456"  #密码
+  poolsize: 100
+
+#snowflake相关配置
+sf:
+  start_time: "2022-08-17"
+  machine_id: 1

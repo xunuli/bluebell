@@ -2,8 +2,7 @@ package model
 
 import "time"
 
-//定义数据库user表的模型
-
+// 定义数据库user表的模型
 type User struct {
 	Id         int       `gorm:"column:id"`
 	UserId     int64     `gorm:"column:user_id"`

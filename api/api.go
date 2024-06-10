@@ -4,8 +4,10 @@ import (
 	"bluebell/internal/dao/mysql"
 	"bluebell/internal/service"
 	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"strconv"
 )
 
 //请求进来，路由到对应的接口处理函数
@@ -56,4 +58,38 @@ func LoginHandler(c *gin.Context) {
 	}
 	//3.返回响应
 	ResponseSuccess(c, token)
+}
+
+// 查询到所有的社区(community_id, community_name)以列表的形式返回
+func CommunityHandler(c *gin.Context) {
+	//查询到所有的社区(community_id, community_name)以列表的形式返回
+	fmt.Println("正在查询1。。。")
+	data, err := service.GetCommunityList()
+	if err != nil {
+		zap.L().Error("service.GetCommunityList failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy) //不轻易把服务端的错误暴露出去
+		return
+	}
+	//返回成功和数据
+	ResponseSuccess(c, data)
+}
+
+// 查询某个社区的具体详情
+func CommunityDetailHandler(c *gin.Context) {
+	//1.获取社区id
+	idStr := c.Param("id") //获取URL参数
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+
+	//2.根据id查询社区详情
+	data, err := service.GetCommunityDetail(id)
+	if err != nil {
+		zap.L().Error("service.GetCommunityDetail fsiled", zap.Error(err))
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	ResponseSuccess(c, data)
 }

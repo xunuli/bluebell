@@ -23,7 +23,7 @@ func CheckUserExist(username string) error {
 	//根据用户名查询数据库
 	var user *model.User
 	mdb := GetDB()
-	row := mdb.Table(user.TableName()).Where("username = ?", username).Find(&user).RowsAffected
+	row := mdb.Model(user).Where("username = ?", username).Find(&user).RowsAffected
 	fmt.Println(user, row)
 	if row > 0 {
 		//说明该用户已经存在

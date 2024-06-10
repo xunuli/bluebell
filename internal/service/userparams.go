@@ -1,6 +1,6 @@
 package service
 
-//定义请求和响应的参数结构体
+//定义user相关的请求的参数结构体
 
 // 注册请求
 type SignUpRequest struct {
